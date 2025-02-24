@@ -14,4 +14,14 @@ resource "docker_container" "nginx" {
     internal = 80
     external = var.starting_port + count.index
   }
+
+  upload {
+    content = file("index.html")
+    file    = "/usr/share/nginx/html/index.html"
+  }
+
+  upload {
+    content = file("nginx.conf")
+    file    = "/etc/nginx/conf.d/default.conf"
+  }
 }
